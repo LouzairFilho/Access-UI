@@ -1,0 +1,14 @@
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.btn-outline-dark:hover {
+    color: #fff;
+    background-color: #838a90;
+    border-color: #343a40;
+}

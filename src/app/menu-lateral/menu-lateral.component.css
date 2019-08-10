@@ -1,0 +1,10 @@
+a {
+    color: #343a40;
+    font-size: 16px;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    font-weight: bold !important;
+    color: #343a40 !important;
+}
