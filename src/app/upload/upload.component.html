@@ -1,4 +1,4 @@
-<section class="jumbotron">
+<section class="card-body">
     <p-messages [(value)]="msgs"></p-messages>
 
     <div class="container">
@@ -15,8 +15,8 @@
 
 
         <button type="button" class="btn btn-dark col-md-1" pTooltip="Enviar Arquivo" tooltipPosition="top" style="margin-bottom: 10px;padding-bottom: 4px;padding-top: 4px;" [disabled]="isEnviarArquivo > 0" (click)="enviarArquivo()">
-                        <i class="material-icons">send</i>
-         </button>
+            <i class="material-icons">send</i>
+        </button>
 
 
         <p-table [value]="listaArquivos">
@@ -44,15 +44,19 @@
                         <span *ngIf="arq.processado > 0">{{ arq.quantidade }}</span>
                     </td>
                     <td align="center">
-                        <button type="button" class="btn sec btn-sm btn-link text-success" pTooltip="Processar Arquivo" tooltipPosition="top">
-                            <i class="material-icons">check_box</i>
-                        </button>
-                        <button type="button" class="btn sec btn-sm btn-link text-danger" pTooltip="Deletar Arquivo" tooltipPosition="top" (click)="delete(arq.id)">
-                            <i class="material-icons">delete</i>
-                        </button>
+                        <div *ngIf="!arq.processado">
+                            <button type="button" class="btn sec btn-sm btn-link text-success" pTooltip="Processar Arquivo" tooltipPosition="top" (click)=processarArquivo(arq.id)>
+                                <i class="material-icons">check_box</i>
+                            </button>
+                            <button type="button" class="btn sec btn-sm btn-link text-danger" pTooltip="Deletar Arquivo" tooltipPosition="top" (click)="delete(arq.id)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </div>
+
                     </td>
                 </tr>
             </ng-template>
         </p-table>
+        <p-paginator [rows]="pagina.size" [totalRecords]="pagina.totalElements" [rowsPerPageOptions]="[5,10,20,40]" (onPageChange)=" paginar($event) "></p-paginator>
     </div>
 </section>

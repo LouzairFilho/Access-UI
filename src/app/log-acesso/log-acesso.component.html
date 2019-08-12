@@ -1,0 +1,51 @@
+<section class="card-body">
+    <p-messages [(value)]="msgs"></p-messages>
+
+    <div class="container">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Cadastro Log de Acesso</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group mr-2">
+                    <button type="button" routerLink="/listagem-log" class="btn sec btn-sm btn-success">
+                       <b> Listagem de Log</b>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row ">
+            <input type="hidden" [(ngModel)]="access.id">
+            <div class="form-group col-sm-3 input-group-sm ">
+                <b><label>Data de Acesso</label></b>
+                <input type="datetime-local" class="form-control" [(ngModel)]="access.data" maxlength="15">
+            </div>
+            <div class="form-group col-sm-3 input-group-sm ">
+                <b><label>IP</label></b>
+                <input type="text " class="form-control" placeholder="192.168.10.110" [(ngModel)]="access.ip" maxlength="15">
+            </div>
+            <div class="form-group col-sm-3 input-group-sm ">
+                <b><label>Metodo HTTP</label></b>
+                <input type="text " class="form-control" placeholder="Informe o Metodo" [(ngModel)]="access.request" maxlength="15">
+            </div>
+            <div class="form-group col-sm-3 input-group-sm ">
+                <b><label>Status</label></b>
+                <input type="tel" class="form-control" placeholder="Informes o Status" [(ngModel)]="access.status" maxlength="3">
+            </div>
+
+            <div class="form-group col-sm-12 input-group-sm ">
+                <b><label>User Agent</label></b>
+                <input type="text " class="form-control " placeholder="Informe o User Agent" [(ngModel)]="access.userAgent">
+            </div>
+            <hr/>
+            <div class="form-group col-sm-1 input-group-sm ">
+                <button type="button" class="btn sec btn-sm btn-success form-control" pTooltip="Pesquisar" tooltipPosition="top" (click)="salvar(access)" style="margin-top: 30px;">
+                    <b>  Salvar</b>
+                </button>
+            </div>
+            <div class="form-group col-sm-1 input-group-sm ">
+                <button type="button" class="btn sec btn-sm btn-danger form-control" pTooltip="Pesquisar" tooltipPosition="top" (click)="ngOnInit()" style="margin-top: 30px;">
+                    <b>  Limpar</b>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

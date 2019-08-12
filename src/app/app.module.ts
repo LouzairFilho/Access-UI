@@ -9,12 +9,20 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UploadComponent } from './upload/upload.component';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
+import { LogAcessoComponent } from './log-acesso/log-acesso.component';
+import { ListagemLogComponent } from './listagem-log/listagem-log.component';
 
 import {FileUploadModule} from 'primeng/fileupload';
 import {TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {PaginatorModule} from 'primeng/paginator';
+import {InputMaskModule} from 'primeng/inputmask';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {ChartModule} from 'primeng/chart';
+import {AccordionModule} from 'primeng/accordion';
+
 
 
 @NgModule({
@@ -22,7 +30,10 @@ import {MessageModule} from 'primeng/message';
     AppComponent,
     NavBarComponent,
     UploadComponent,
-    MenuLateralComponent
+    MenuLateralComponent,
+    LogAcessoComponent,
+    ListagemLogComponent,
+    DashboardComponent
     ],
   imports: [
     BrowserModule,
@@ -33,7 +44,11 @@ import {MessageModule} from 'primeng/message';
     BrowserAnimationsModule,
     TooltipModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    PaginatorModule,
+    InputMaskModule,
+    ChartModule,
+    AccordionModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

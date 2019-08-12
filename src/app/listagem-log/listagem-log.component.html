@@ -1,0 +1,62 @@
+<section class="card-body">
+    <p-messages [(value)]="msgs"></p-messages>
+
+    <div class="container">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Listagem de Log</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group mr-2">
+                    <button type="button" routerLink="/cadastro-log" class="btn sec btn-sm btn-success">
+                        <b> Novo Log </b>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row ">
+            <div class="form-group col-sm-2 input-group-sm ">
+                <b><label>IP</label></b>
+                <input type="text " class="form-control" placeholder="192.168.10.110" [(ngModel)]="filtro.ip" (keyup)="filtrar()" maxlength="15">
+            </div>
+            <div class="form-group col-sm-9 input-group-sm ">
+                <b><label>User Agent</label></b>
+                <input type="text " class="form-control " placeholder="Informe o User Agent" [(ngModel)]="filtro.userAgent" (keyup)="filtrar()">
+            </div>
+
+            <div class="form-group col-sm-1 input-group-sm ">
+                <button type="button" class="btn btn-sm btn-danger form-control" pTooltip="Limpar" tooltipPosition="top" (click)="ngOnInit()" style="margin-top: 30px;">
+                    <b> Limpar</b>
+                </button>
+            </div>
+        </div>
+        <p-table [value]="listaLog">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th width="120 ">#</th>
+                    <th width="150 ">Data de Acesso</th>
+                    <th width="140 ">IP</th>
+                    <th width="100 ">Status</th>
+                    <th width="160 ">Metodo HTTP</th>
+                    <th>User Agent</th>
+                    <th width="160 ">Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-log>
+                <tr>
+                    <td>{{ log.id }}</td>
+                    <td>{{ log.data | date: 'dd/MM/yyyy HH:mm' }}</td>
+                    <td>{{ log.ip }}</td>
+                    <td>{{ log.status }}</td>
+                    <td>{{ log.request }}</td>
+                    <td>{{ log.userAgent }}</td>
+                    <td align="center">
+
+                        <button type="button" class="btn sec btn-sm btn-link text-danger" pTooltip="Deletar Log Acesso" tooltipPosition="top" (click)="delete(log.id)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-paginator [rows]="pagina.size" [totalRecords]="pagina.totalElements" [rowsPerPageOptions]="[10,20,40]" (onPageChange)=" paginar($event) "></p-paginator>
+    </div>
+</section>

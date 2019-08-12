@@ -1,0 +1,36 @@
+<section class="card-body">
+    <p-messages [(value)]="msgs"></p-messages>
+    <div class="container">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+
+        </div>
+        <p-accordion>
+            <p-accordionTab header="Gráfico" [selected]="true">
+                <p-chart type="doughnut" [data]="dataSet" width="100%" height="1000px"></p-chart>
+            </p-accordionTab>
+            <p-accordionTab header="Tabela">
+                <p-table [value]="listaAccesso">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="150 ">Ip</th>
+                            <th>User Agent</th>
+                            <th width="150 ">Quant.</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-log>
+                        <tr>
+                            <td>{{ log.ip }}</td>
+                            <td>{{ log.userAgent }}</td>
+                            <td>{{ log.quantidade }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-accordionTab>
+
+        </p-accordion>
+
+
+
+    </div>
+</section>
