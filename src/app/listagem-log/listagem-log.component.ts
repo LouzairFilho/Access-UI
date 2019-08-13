@@ -3,6 +3,7 @@ import { Page } from '../modelo/page';
 import { Message } from 'primeng/components/common/message';
 import { LogAcessoService } from '../log-acesso/log-acesso.service';
 import { RespostaAPI } from '../modelo/RespostaAPI';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-listagem-log',
@@ -14,8 +15,10 @@ export class ListagemLogComponent implements OnInit {
   pagina: Page;
   msgs: Message[] = [];
   filtro:{ip:string, userAgent:String};
+  isFiltrando = false;
 
-  constructor(private logAcessoService: LogAcessoService) { }
+  constructor(private logAcessoService: LogAcessoService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.filtro = { ip:'',userAgent:'' }
@@ -23,39 +26,60 @@ export class ListagemLogComponent implements OnInit {
 
     this.listarAccess(this.pagina.number, this.pagina.size);
   }
+
   listarAccess(page, size) {
+    this.spinner.show();
     this.logAcessoService.listar(page, size).subscribe(
       res => {
         this.pagina = <any>res;
         this.listaLog = this.pagina.content;
+        this.isFiltrando = false;
+        this.spinner.hide();
       }
     );
   }
 
+  filtrarAccess(page, size){
+    this.spinner.show();
+    this.logAcessoService.filtrar(page, size,this.filtro).subscribe(
+      res => {
+        let retorno = <RespostaAPI>res;
+        this.pagina = retorno.data;
+        this.listaLog = this.pagina.content;
+        this.isFiltrando = true;
+      }
+    );
+  }
+
+  paginar(event){
+    this.pagina = new Page(event.page, event.rows);
+    if(this.isFiltrando){
+      this.filtrarAccess(this.pagina.number, this.pagina.size);
+    }else{
+      this.listarAccess(this.pagina.number, this.pagina.size);
+    }
+  }
+
   filtrar(){
-    console.log("asdaspofffffffffffffff");
     if(this.filtro.ip.length >= 5 || this.filtro.userAgent.length >= 5){
       this.pagina = new Page(0, 10);
-      this.logAcessoService.filtrar(this.pagina.number, this.pagina.size,this.filtro).subscribe(
-        res => {
-          let retorno = <RespostaAPI>res;
-          this.pagina = retorno.data;
-          this.listaLog = this.pagina.content;
-        }
-      );
+      this.filtrarAccess(this.pagina.number, this.pagina.size);
     }
   }
 
   delete(id) {
+    this.spinner.show();
     this.logAcessoService.delete(id).subscribe(
       res => {
         let retorno = <RespostaAPI>res;
         this.showMsg('success', '', retorno.message);
         this.listarAccess(this.pagina.number, this.pagina.size);
+        this.spinner.hide();
       },
       err => {
-
+        this.spinner.hide();
         this.showMsg('error', '', err.error);
+
       }
     );
   }
@@ -64,4 +88,6 @@ export class ListagemLogComponent implements OnInit {
     this.msgs = [];
     this.msgs.push({ severity: _severity, summary: _summary, detail: _detail });
   }
+
+
 }

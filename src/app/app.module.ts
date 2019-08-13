@@ -12,6 +12,8 @@ import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
 import { LogAcessoComponent } from './log-acesso/log-acesso.component';
 import { ListagemLogComponent } from './listagem-log/listagem-log.component';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+
 import {FileUploadModule} from 'primeng/fileupload';
 import {TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
@@ -48,7 +50,8 @@ import {AccordionModule} from 'primeng/accordion';
     PaginatorModule,
     InputMaskModule,
     ChartModule,
-    AccordionModule
+    AccordionModule,
+    NgxSpinnerModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

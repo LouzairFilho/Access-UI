@@ -57,6 +57,9 @@
                 </tr>
             </ng-template>
         </p-table>
-        <p-paginator [rows]="pagina.size" [totalRecords]="pagina.totalElements" [rowsPerPageOptions]="[10,20,40]" (onPageChange)=" paginar($event) "></p-paginator>
+        <p-paginator [rows]="pagina.size" [totalRecords]="pagina.totalElements" [rowsPerPageOptions]="[10,20,40]" (onPageChange)="paginar($event) "></p-paginator>
     </div>
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#fff" type="ball-clip-rotate-multiple">
+        <p style="font-size: 20px; color: white">Aguarde...</p>
+    </ngx-spinner>
 </section>

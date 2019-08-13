@@ -5,9 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UploadService {
-  private apiUrl = "http://localhost:8081/access-api";
+  private apiUrl = "";
   
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient : HttpClient) {
+    //this.apiUrl = "https://access-api-ps.herokuapp.com/access-api";
+    this.apiUrl = "http://localhost:8081/access-api";
+   }
   
   
   listar(page,size) {

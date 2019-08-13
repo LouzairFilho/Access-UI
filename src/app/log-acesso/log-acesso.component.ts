@@ -3,6 +3,7 @@ import { LogAcessoService } from './log-acesso.service';
 import { Access } from '../modelo/Access';
 import { Message } from 'primeng/components/common/message';
 import { RespostaAPI } from '../modelo/RespostaAPI';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-log-acesso',
@@ -14,7 +15,8 @@ export class LogAcessoComponent implements OnInit {
   access: Access;
   msgs: Message[] = [];
   
-  constructor(private logAcessoService :LogAcessoService) { }
+  constructor(private logAcessoService :LogAcessoService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.access = {data:'',request:'',ip:'',status: '',userAgent: ''};
@@ -22,14 +24,17 @@ export class LogAcessoComponent implements OnInit {
   }
 
   salvar(_access){
+    this.spinner.show();
       this.logAcessoService.salvar(_access).subscribe(
         res => {
           let retorno = <RespostaAPI>res;
           this.showMsg('success', '', retorno.message);
           this.access = new Access;
+          this.spinner.hide();
         },
         err => {
           this.showMsg('error', '', err.error);
+          this.spinner.hide();
         }
       );
   }

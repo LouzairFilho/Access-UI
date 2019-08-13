@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccessDashboard } from '../modelo/AccessDashboard';
 import { DashboardService } from './dashboard.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,8 @@ export class DashboardComponent implements OnInit {
   labelGrafico: any[];
   dadosGrafico: any[]
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.labelGrafico = [];
@@ -24,6 +26,7 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarDados() {
+    this.spinner.show();
     this.dashboardService.listar().subscribe(
       res => {
         this.listaAccesso = <any>res;
@@ -39,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
             }]
         };
-
+        this.spinner.hide();
       }
     );
   }
