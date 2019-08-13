@@ -47,8 +47,12 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  extraiInfo() {
-    for (var i = 0; i < 100; i++){
+ extraiInfo() {
+    let limite = this.listaAccesso.length;
+    if(this.listaAccesso.length>100){
+      limite = 100
+    }
+    for (var i = 0; i < limite; i++){
       this.labelGrafico.push(this.listaAccesso[i].ip);
       this.dadosGrafico.push(this.listaAccesso[i].quantidade);
     }
